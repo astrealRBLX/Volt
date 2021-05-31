@@ -49,7 +49,8 @@ function Server.Execute(execs, async)
 				end
 				
 				return constructBridge(remote)
-			end
+			end,
+			Server = Volt.Server
 		}
 		Volt.Server[exe.Name or error('Attempted to execute a module without a provided name field')] = exe
 		if (exe.OnExecute) then
