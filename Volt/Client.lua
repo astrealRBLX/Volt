@@ -33,7 +33,8 @@ function Client.Execute(execs, async)
 		exe.Volt = {
 			GetBridge = function(path)
 				return constructBridge(getFromPath(Volt.Bridges, path or error('A path must be provided to get a bridge')))
-			end
+			end,
+			Client = Volt.Client
 		}
 		Volt.Client[exe.Name or error('Attempted to execute a module without a provided name field')] = exe
 		if (exe.OnExecute) then
