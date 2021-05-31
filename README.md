@@ -5,7 +5,14 @@ An intuitive and feature-packed Roblox game framework.
 
 
 ### Why Volt?
-While other game frameworks exist (most notably AGF & Knit), Volt provides a different feature set as well as a different focus. Volt was created around the idea that organization comes before everything else. Many games tend to quickly become disorganized as they get populated with more and more scripts. Volt solves this problem through 'executables', module scripts Volt can read and assign to the server and client for simple communication between them. Volt also makes giving users the ability to manipulate the control flow of their scripts a priority including in an asynchronous manner.
+While other game frameworks exist (most notably AGF & Knit), Volt provides a different feature set as well as a different focus. Volt was created around the idea that organization comes before everything else. Many games tend to quickly become disorganized as they get populated with more and more scripts. Volt solves this problem through [executables](https://github.com/astrealRBLX/volt/wiki/Executables), module scripts Volt can read and assign to the server and client for simple communication between them. Volt also makes giving users the ability to manipulate the control flow of their scripts a priority including in an asynchronous manner.
+
+### Get Volt
+* [Roblox Model](https://www.roblox.com/library/6892133318/Volt)
+* [Volt ZIP](https://github.com/astrealRBLX/volt/files/6572222/Volt.zip)
+
+### Documentation
+Check out the [Wiki](https://github.com/astrealRBLX/volt/wiki) for documentation and a full tutorial on the various features of Volt.
 
 ### Example
 ```lua
