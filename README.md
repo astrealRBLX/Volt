@@ -9,7 +9,7 @@ While other game frameworks exist (most notably AGF & Knit), Volt provides a dif
 
 ### Get Volt
 * [Roblox Model](https://www.roblox.com/library/6892133318/Volt)
-* [Volt ZIP](https://github.com/astrealRBLX/volt/files/6572222/Volt.zip)
+* [Latest Release - Rojo Support](https://github.com/astrealRBLX/volt/releases)
 
 ### Documentation
 Check out the [Official Volt Documentation](https://astrealrblx.github.io/volt/) for documentation and a full tutorial on the various features of Volt.
