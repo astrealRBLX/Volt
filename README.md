@@ -12,7 +12,7 @@ While other game frameworks exist (most notably AGF & Knit), Volt provides a dif
 * [Volt ZIP](https://github.com/astrealRBLX/volt/files/6572222/Volt.zip)
 
 ### Documentation
-Check out the [Wiki](https://github.com/astrealRBLX/volt/wiki) for documentation and a full tutorial on the various features of Volt.
+Check out the [Official Volt Documentation](https://astrealrblx.github.io/volt/) for documentation and a full tutorial on the various features of Volt.
 
 ### Example
 ```lua
