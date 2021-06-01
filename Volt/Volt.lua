@@ -3,16 +3,16 @@
 	Volt // Game Framework
 	Created by AstrealDev
 	
-	Version 1.0.0
+	Version 1.0.1
 
 ]]
 
-local Volt = { Core = {}, Config = require(script.Config), Root = script }
+local Volt = { Core = {}, Libraries = {}, Config = require(script.Config), Root = script }
 
 local core = script.Core
 local lib = script.Libraries
 
-local isClient = game.Players.LocalPlayer and true or false
+local isClient = game:GetService('RunService'):IsClient()
 
 for _, m in pairs(core:GetChildren()) do
 	local src = require(m)
@@ -21,8 +21,19 @@ for _, m in pairs(core:GetChildren()) do
 	Volt.Core[src.name] = src
 end
 
-for _, m in pairs(lib:GetChildren()) do
+for _, m in pairs(lib:GetDescendants()) do
+	if (not m:IsA('ModuleScript')) then continue end
 	local src = require(m)
+	if (src.name == nil) then
+		error('All libraries must contain a name property')
+	end
+	Volt.Libraries[src.name] = src
+end
+
+for _, src in pairs(Volt.Libraries) do
+	src.Volt = {
+		Libraries = Volt.Libraries
+	}
 	if (src.constructor) then
 		src.constructor()
 		src.constructor = nil
