@@ -1,0 +1,55 @@
+site_name: Volt
+site_description: Volt framework documentation
+site_author: AstrealDev
+repo_url: https://github.com/astrealRBLX/volt
+repo_name: Volt
+
+nav:
+  - Home: index.md
+  - Getting Started: start.md
+  - Executables: executables.md
+  - Bridges: bridges.md
+  - Libraries:
+    - Overview: libs/index.md
+    - BetterWait: libs/betterwait.md
+    - InstanceBuilder: libs/instancebuilder.md
+    - Spring: libs/spring.md
+  - API:
+    - Volt: api/volt.md
+    - Executables: api/executables.md
+    - Bridges: api/bridges.md
+
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/logo.png
+  palette:
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Light Mode
+      primary: red
+      accent: deep orange
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Dark Mode
+      primary: red
+      accent: deep orange
+  features:
+    - navigation.instant
+    - navigation.sections
+
+markdown_extensions:
+  - pymdownx.highlight:
+      linenums: false
+  - toc:
+      permalink: "#"
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed
+  - pymdownx.progressbar
+  - admonition
+
+plugins:
+  - search
