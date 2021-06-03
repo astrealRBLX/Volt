@@ -1,4 +1,5 @@
 return {
+	Debug = true,
 	Core = {
 		Import = {
 			VoltPath = game:GetService('ReplicatedStorage').Volt,
@@ -6,5 +7,5 @@ return {
 				root = game:GetService('ReplicatedStorage'),
 			}
 		}
-	},
+	}
 }

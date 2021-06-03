@@ -67,11 +67,11 @@ In this example assume we have a `Money` and `Role` executable. The `Money` exec
             local roleChosen = Role.ValidRoles[math.random(1, #Role.ValidRoles)]
             players[player] = roleChosen
 
-            -- Notice how AssignMoney is being called even though Money is executed AFTER Role
-            -- Since it's being called in PlayerAdded we are certain that all executables have loaded
-            -- The reason for this being a player joining takes significantly longer than an executable firing
-            -- To be even safer we could execute the executables as async if we wanted
-            Role.Volt.Server.Money.AssignMoney(player, roleChosen)
+            -- Await will wait x amount of time (5s in this example) for another executable to execute and then call a function
+            Role.Volt.Server.Await('Money', 5, function()
+                -- We know Money has executed so we have access to the AssignMoney function
+                Role.Volt.Server.Money.AssignMoney(player, roleChosen)
+            end)
         end)
     end
 

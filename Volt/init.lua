@@ -3,9 +3,11 @@
 	Volt // Game Framework
 	Created by AstrealDev
 	
-	Version 1.0.1
+	Version 1.0.2
 
 ]]
+
+local initialTime = tick()
 
 local Volt = { Core = {}, Libraries = {}, Config = require(script.Config), Root = script }
 
@@ -50,5 +52,11 @@ else
 end
 
 Volt.import = Volt.Core.Import.new
+
+if (Volt.Config.Debug == true) then
+	print(string.format('%s LOADED (%fs)', isClient and 'CLIENT' or 'SERVER', tick() - initialTime))
+else
+	initialTime = nil
+end
 
 return Volt
