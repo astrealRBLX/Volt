@@ -651,11 +651,11 @@
         <span class="kd">local</span> <span class="n">roleChosen</span> <span class="o">=</span> <span class="n">Role</span><span class="p">.</span><span class="n">ValidRoles</span><span class="p">[</span><span class="nb">math.random</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">#</span><span class="n">Role</span><span class="p">.</span><span class="n">ValidRoles</span><span class="p">)]</span>
         <span class="n">players</span><span class="p">[</span><span class="n">player</span><span class="p">]</span> <span class="o">=</span> <span class="n">roleChosen</span>
 
-        <span class="c1">-- Notice how AssignMoney is being called even though Money is executed AFTER Role</span>
-        <span class="c1">-- Since it&#39;s being called in PlayerAdded we are certain that all executables have loaded</span>
-        <span class="c1">-- The reason for this being a player joining takes significantly longer than an executable firing</span>
-        <span class="c1">-- To be even safer we could execute the executables as async if we wanted</span>
-        <span class="n">Role</span><span class="p">.</span><span class="n">Volt</span><span class="p">.</span><span class="n">Server</span><span class="p">.</span><span class="n">Money</span><span class="p">.</span><span class="n">AssignMoney</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">roleChosen</span><span class="p">)</span>
+        <span class="c1">-- Await will wait x amount of time (5s in this example) for another executable to execute and then call a function</span>
+        <span class="n">Role</span><span class="p">.</span><span class="n">Volt</span><span class="p">.</span><span class="n">Server</span><span class="p">.</span><span class="n">Await</span><span class="p">(</span><span class="s1">&#39;Money&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kr">function</span><span class="p">()</span>
+            <span class="c1">-- We know Money has executed so we have access to the AssignMoney function</span>
+            <span class="n">Role</span><span class="p">.</span><span class="n">Volt</span><span class="p">.</span><span class="n">Server</span><span class="p">.</span><span class="n">Money</span><span class="p">.</span><span class="n">AssignMoney</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">roleChosen</span><span class="p">)</span>
+        <span class="kr">end</span><span class="p">)</span>
     <span class="kr">end</span><span class="p">)</span>
 <span class="kr">end</span>
 
