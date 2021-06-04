@@ -7,7 +7,7 @@ InstanceBuilder is a library created specifically for Volt. It allows you to use
 ## Example
 ```lua
 local Volt = require(game.ReplicatedStorage.Volt)
-Volt.import('Libraries/InstanceBuilder')
+Volt.import('Libraries/Instances/InstanceBuilder')
 
 local myPart = Instance.new('Part')
     .Name('My Part!')

@@ -11,9 +11,16 @@ nav:
   - Bridges: bridges.md
   - Libraries:
     - Overview: libs/index.md
-    - BetterWait: libs/betterwait.md
-    - InstanceBuilder: libs/instancebuilder.md
-    - Spring: libs/spring.md
+    - Instances:
+      - InstanceBuilder: libs/instancebuilder.md
+      - Component: libs/component.md
+    - Physics:
+      - Spring: libs/spring.md
+    - Utilities:
+      - Wait: libs/wait.md
+      - Table: libs/table.md
+      - Tween: libs/tween.md
+      - Promise: libs/promise.md
   - API:
     - Volt: api/volt.md
     - Executables: api/executables.md

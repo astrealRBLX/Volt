@@ -7,7 +7,7 @@
 
 ]]
 
-local BetterWait = { Name = 'BetterWait' }
+local BetterWait = { Name = 'Wait' }
 local enabled = true
 local warnings = true
 local threads = {}
@@ -17,7 +17,7 @@ function BetterWait.OnImport()
 	
 	getfenv(3).wait = function(t)
 		if (t == nil) then
-			warn('Using wait() is not recommended, prefer RunService.Heartbeat:Wait()')
+			if (warnings) then warn('Using wait() is not recommended, prefer RunService.Heartbeat:Wait()') end
 		end
 		
 		t = tonumber(t) or (1 / 30)
