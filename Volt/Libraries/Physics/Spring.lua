@@ -1,12 +1,12 @@
 --[[
 
-	Spring // Provided by Volt
-	Ported from RoStrap
-	Originally by fractality
+	Libraries/Physics/Spring
+
+	@author fractality
 	
 ]]
 
-local Spring = { name = 'Spring' }
+local Spring = { Name = 'Spring' }
 Spring.__index = Spring
 
 local pi = math.pi

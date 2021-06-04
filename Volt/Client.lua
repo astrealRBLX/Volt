@@ -1,5 +1,5 @@
 local Client = {}
-local Volt
+local Volt, Promise
 
 local function getFromPath(o, s)
 	for i, v in pairs(string.split(s, '/')) do
@@ -83,9 +83,28 @@ function Client.Execute(execs, async)
 	end
 end
 
+function Client.Await(n, t)
+	local promise = Promise.new(function(resolve, reject)
+		coroutine.wrap(function()
+			local initialTime = tick()
+			repeat
+				game:GetService('RunService').Stepped:Wait()
+				local passedTime = tick() - initialTime
+				if (passedTime >= (t or 10)) then
+					reject()
+					error(string.format('Client.Await() has timed out (%fs)', passedTime))
+				end
+			until (Volt.Server[n] ~= nil)
+			resolve()
+		end)()
+	end)
+	return promise
+end
+
 return setmetatable({}, {
 	__call = function(t, v, ...)
 		Volt = v
+		Promise = Volt.import('Libraries/Utilities/Promise')
 		return Client
 	end,
 })

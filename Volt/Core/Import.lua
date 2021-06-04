@@ -1,4 +1,4 @@
-local Import = { name = 'Import', importable = false }
+local Import = { Name = 'Import', importable = false }
 local ImportClass = {}
 local root, volt
 

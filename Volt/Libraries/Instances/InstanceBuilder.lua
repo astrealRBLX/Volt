@@ -1,11 +1,12 @@
-local InstanceBuilder = { name = 'InstanceBuilder' }
+local InstanceBuilder = { Name = 'InstanceBuilder' }
 local InstanceClass = {}
 local enabled = true
 
 --[[
 
-	InstanceBuilder // Provided by Volt
-	Created by AstrealDev
+	Libraries/Instances/InstanceBuilder
+
+    @author AstrealDev
 
 ]]
 
