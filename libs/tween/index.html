@@ -466,9 +466,115 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Tween
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Tween
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    API
+  </a>
+  
+    <nav class="md-nav" aria-label="API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tween-tweennewany-initialvalue-any-goal-number-time-easingstyle-style-easingdirection-direction" class="md-nav__link">
+    Tween Tween.new(any initialValue, any goal, number time, EasingStyle style, EasingDirection direction)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#any-tweenlerpany-a-any-b-number-alpha" class="md-nav__link">
+    any Tween.Lerp(any a, any b, number alpha)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-tweenstart" class="md-nav__link">
+    void Tween:Start()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-tweenonstepfunction-callback" class="md-nav__link">
+    void Tween:OnStep(function callback)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-tweenoncompletefunction-callback" class="md-nav__link">
+    void Tween:OnComplete(function callback)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-tweenwait" class="md-nav__link">
+    void Tween:Wait()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-tweenpause" class="md-nav__link">
+    void Tween:Pause()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-tweenresume" class="md-nav__link">
+    void Tween:Resume()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-tweenfinish" class="md-nav__link">
+    void Tween:Finish()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -585,6 +691,97 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    API
+  </a>
+  
+    <nav class="md-nav" aria-label="API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tween-tweennewany-initialvalue-any-goal-number-time-easingstyle-style-easingdirection-direction" class="md-nav__link">
+    Tween Tween.new(any initialValue, any goal, number time, EasingStyle style, EasingDirection direction)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#any-tweenlerpany-a-any-b-number-alpha" class="md-nav__link">
+    any Tween.Lerp(any a, any b, number alpha)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-tweenstart" class="md-nav__link">
+    void Tween:Start()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-tweenonstepfunction-callback" class="md-nav__link">
+    void Tween:OnStep(function callback)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-tweenoncompletefunction-callback" class="md-nav__link">
+    void Tween:OnComplete(function callback)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-tweenwait" class="md-nav__link">
+    void Tween:Wait()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-tweenpause" class="md-nav__link">
+    void Tween:Pause()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-tweenresume" class="md-nav__link">
+    void Tween:Resume()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#void-tweenfinish" class="md-nav__link">
+    void Tween:Finish()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -602,6 +799,43 @@
                 
                 <h1 id="tween">Tween<a class="headerlink" href="#tween" title="Permanent link">#</a></h1>
 <p>Tween is a great library as an alternative to Roblox's TweenService.</p>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">#</a></h2>
+<p>This example will tween a number from 1 to 1000 over 5 seconds using the Quad EasingStyle and Out EasingDirection, round it down, then set a TextLabel's text to the number.
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">Volt</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">game</span><span class="p">.</span><span class="n">ReplicatedStorage</span><span class="p">.</span><span class="n">Volt</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">Tween</span> <span class="o">=</span> <span class="n">Volt</span><span class="p">.</span><span class="n">import</span><span class="p">(</span><span class="s1">&#39;Libraries/Utilities/Tween&#39;</span><span class="p">)</span>
+
+<span class="kd">local</span> <span class="n">player</span> <span class="o">=</span> <span class="n">game</span><span class="p">.</span><span class="n">Players</span><span class="p">.</span><span class="n">LocalPlayer</span>
+
+<span class="kd">local</span> <span class="n">screenGUI</span> <span class="o">=</span> <span class="n">script</span><span class="p">.</span><span class="n">Parent</span>
+<span class="kd">local</span> <span class="n">label</span> <span class="o">=</span> <span class="n">screenGUI</span><span class="p">.</span><span class="n">TextLabel</span>
+
+<span class="kd">local</span> <span class="n">tween</span> <span class="o">=</span> <span class="n">Tween</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">Enum</span><span class="p">.</span><span class="n">EasingStyle</span><span class="p">.</span><span class="n">Quad</span><span class="p">,</span> <span class="n">Enum</span><span class="p">.</span><span class="n">EasingDirection</span><span class="p">.</span><span class="n">Out</span><span class="p">)</span>
+<span class="n">tween</span><span class="p">:</span><span class="n">OnStep</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">label</span><span class="p">.</span><span class="n">Text</span> <span class="o">=</span> <span class="nb">tostring</span><span class="p">(</span><span class="nb">math.floor</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+<span class="kr">end</span><span class="p">)</span>
+<span class="n">tween</span><span class="p">:</span><span class="n">Start</span><span class="p">()</span>
+</code></pre></div></p>
+<h2 id="api">API<a class="headerlink" href="#api" title="Permanent link">#</a></h2>
+<blockquote>
+<h4 id="tween-tweennewany-initialvalue-any-goal-number-time-easingstyle-style-easingdirection-direction"><code>Tween Tween.new(any initialValue, any goal, number time, EasingStyle style, EasingDirection direction)</code><a class="headerlink" href="#tween-tweennewany-initialvalue-any-goal-number-time-easingstyle-style-easingdirection-direction" title="Permanent link">#</a></h4>
+<p>Create a new tween object.</p>
+<h4 id="any-tweenlerpany-a-any-b-number-alpha"><code>any Tween.Lerp(any a, any b, number alpha)</code><a class="headerlink" href="#any-tweenlerpany-a-any-b-number-alpha" title="Permanent link">#</a></h4>
+<p>Tween a value by providing an alpha. Special Roblox types are supported such as Vector3 and UDim2. Alpha should be between 0 and 1.</p>
+<h4 id="void-tweenstart"><code>void Tween:Start()</code><a class="headerlink" href="#void-tweenstart" title="Permanent link">#</a></h4>
+<p>Begin a tween.</p>
+<h4 id="void-tweenonstepfunction-callback"><code>void Tween:OnStep(function callback)</code><a class="headerlink" href="#void-tweenonstepfunction-callback" title="Permanent link">#</a></h4>
+<p>Connect a callback function called every time a tween steps.</p>
+<h4 id="void-tweenoncompletefunction-callback"><code>void Tween:OnComplete(function callback)</code><a class="headerlink" href="#void-tweenoncompletefunction-callback" title="Permanent link">#</a></h4>
+<p>Connect a callback function called when a tween completes.</p>
+<h4 id="void-tweenwait"><code>void Tween:Wait()</code><a class="headerlink" href="#void-tweenwait" title="Permanent link">#</a></h4>
+<p>Yield until a tween completes.</p>
+<h4 id="void-tweenpause"><code>void Tween:Pause()</code><a class="headerlink" href="#void-tweenpause" title="Permanent link">#</a></h4>
+<p>Pause a currently running tween.</p>
+<h4 id="void-tweenresume"><code>void Tween:Resume()</code><a class="headerlink" href="#void-tweenresume" title="Permanent link">#</a></h4>
+<p>Resume a currently running tween.</p>
+<h4 id="void-tweenfinish"><code>void Tween:Finish()</code><a class="headerlink" href="#void-tweenfinish" title="Permanent link">#</a></h4>
+<p>Force a tween to skip to its goal.</p>
+</blockquote>
                 
               
               

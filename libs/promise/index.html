@@ -502,6 +502,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#documentation" class="md-nav__link">
     Documentation
   </a>
@@ -622,6 +629,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#documentation" class="md-nav__link">
     Documentation
   </a>
@@ -647,6 +661,23 @@
                 
                 <h1 id="promise">Promise<a class="headerlink" href="#promise" title="Permanent link">#</a></h1>
 <p>Promise was created by evaera and used by Volt. The GitHub for it can be found <a href="https://github.com/evaera/roblox-lua-promise">here</a>.</p>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">Volt</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="n">game</span><span class="p">.</span><span class="n">ReplicatedStorage</span><span class="p">.</span><span class="n">Volt</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">Promise</span> <span class="o">=</span> <span class="n">Volt</span><span class="p">.</span><span class="n">import</span><span class="p">(</span><span class="s1">&#39;Libraries/Utilities/Promise&#39;</span><span class="p">)</span>
+
+<span class="kd">local</span> <span class="n">myPromise</span> <span class="o">=</span> <span class="n">Promise</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="n">resolve</span><span class="p">,</span> <span class="n">reject</span><span class="p">)</span>
+    <span class="nb">coroutine.wrap</span><span class="p">(</span><span class="kr">function</span><span class="p">()</span>
+        <span class="p">...</span>
+        <span class="n">resolve</span><span class="p">(</span><span class="s1">&#39;Some code ran successfully!&#39;</span><span class="p">)</span>
+    <span class="kr">end</span><span class="p">)()</span>
+<span class="kr">end</span><span class="p">)</span>
+
+<span class="n">myPromise</span><span class="p">:</span><span class="n">andThen</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="c1">--&gt; Outputs: Some code ran successfully!</span>
+<span class="kr">end</span><span class="p">):</span><span class="n">catch</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="n">textError</span><span class="p">)</span>
+    <span class="nb">error</span><span class="p">(</span><span class="s1">&#39;Promise failed to run due to: &#39;</span> <span class="o">..</span> <span class="n">textError</span><span class="p">)</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="documentation"><a href="https://eryn.io/roblox-lua-promise/lib/">Documentation</a><a class="headerlink" href="#documentation" title="Permanent link">#</a></h2>
                 
               
