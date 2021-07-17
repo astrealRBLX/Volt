@@ -9,6 +9,7 @@ nav:
   - Getting Started: start.md
   - Executables: executables.md
   - Bridges: bridges.md
+  - Bridges (LEGACY): bridges_legacy.md
   - Libraries:
     - Overview: libs/index.md
     - Instances:
@@ -25,6 +26,7 @@ nav:
     - Volt: api/volt.md
     - Executables: api/executables.md
     - Bridges: api/bridges.md
+    - Bridges (LEGACY): api/bridges_legacy.md
 
 theme:
   name: material

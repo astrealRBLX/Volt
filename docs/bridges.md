@@ -1,90 +1,91 @@
 # Bridges
-Bridges replace the need for RemoteFunctions and RemoteEvents in Volt. They are used to communicate client -> server and server -> client.
+Volt attempts to reduce the frustrations concerning client & server communication. The primary method of communication across the client-server boundary is RemoteEvents & RemoteFunctions that Roblox provides. These can be a hassle to set up and maintain so Volt does the heavy lifting for you and provides a wrapper in the form of Bridges.
 
 ## Creating a Bridge
-Bridges are created within executables.
+Bridges are created within executables inside their `OnExecute()` method.
 === "Client To Server"
 
-    !!! example "SomeExecutable.Server"
+    !!! example "PlayerData.Server"
         ```lua
-        local MyExe = { Name = 'MyExe', Async = false }
+        local PlayerData = {
+            Name = 'PlayerData',
+            Async = false,
+            Bridges = {}
+        }
 
-        local function RegisterBridges()
-            MyExe.Volt.RegisterBridge('MyBridge', function(player)
-                print('From client to server!')
+        function PlayerData.OnExecute()
+            -- Register a bridge called MyBridge
+            PlayerData.Bridges.MyBridge = PlayerData.Volt.Bridge.new()
+
+            -- Connect to the bridge and provide it a callback
+            PlayerData.Bridges.MyBridge:Connect(function(player)
+                print(player.Name)
             end)
         end
 
-        function MyExe.OnExecute()
-            RegisterBridges()
-        end
-
-        return MyExe
+        return PlayerData
         ```
 
-    !!! example "SomeExecutable.Client"
+    !!! example "PlayerData.Client"
         ```lua
-        local MyExe = { Name = 'MyExe', Async = false }
+        local PlayerData = {
+            Name = 'PlayerData',
+            Async = false,
+            Bridges = {}
+        }
 
-        function MyExe.OnExecute()
-            MyExe.Volt.GetBridge('MyBridge'):Fire()
+        function PlayerData.OnExecute()
+            -- Fire the bridge going client -> server
+            PlayerData.Bridges.MyBridge:Fire()
         end
 
-        return MyExe
+        return PlayerData
         ```
 
 === "Server To Client"
 
-    !!! example "SomeExecutable.Server"
+    !!! example "PlayerData.Server"
         ```lua
-        local MyExe = { Name = 'MyExe', Async = false }
+        local PlayerData = {
+            Name = 'PlayerData',
+            Async = false,
+            Bridges = {}
+        }
 
-        local someBridge
+        function PlayerData.OnExecute()
+            -- Register a bridge called MyBridge
+            PlayerData.Bridges.MyBridge = PlayerData.Volt.Bridge.new()
 
-        local function RegisterBridges()
-            someBridge = MyExe.Volt.RegisterBridge('MyBridge')
-        end
-
-        function MyExe.OnExecute()
-            RegisterBridges()
-
-            --[[
-                Later in your executable, once you've ensured the client has executed,
-                you can call the :Fire() method on the bridge
-
-                E.g.
-                someBridge:Fire()
-            ]]
-        end
-
-        return MyExe
-        ```
-
-    !!! example "SomeExecutable.Client"
-        ```lua
-        local MyExe = { Name = 'MyExe', Async = false }
-
-        function MyExe.OnExecute()
-            MyExe.Volt.GetBridge('MyBridge'):Hook(function()
-                print('From server to client!')
+            -- Wait for the player to be added so the client executable has a chance
+            -- to connect to the bridge
+            game:GetService('Players').PlayerAdded:Connect(function(player)
+                -- Fire the bridge on the provided player going server -> client
+                PlayerData.Bridges.MyBridge:Fire(player)
             end)
         end
 
-        return MyExe
+        return PlayerData
+        ```
+
+    !!! example "PlayerData.Client"
+        ```lua
+        local PlayerData = {
+            Name = 'PlayerData',
+            Async = false,
+            Bridges = {}
+        }
+
+        function PlayerData.OnExecute()
+            PlayerData.Bridges.MyBridge:Connect(function()
+                print('Server -> Client!')
+            end)
+        end
+
+        return PlayerData
         ```
 
 !!! warning
-    All bridges must be registered on the server. The client does not have access to the `RegisterBridge` function.
+    Bridges cannot be registered on the client and their creation is expected on the server. The only exception to this rule is interal use.
 
-## Organizing Bridges
-Staying organized with your bridges is important. That's why bridges use a similar directory system to Volt's [import](/start/#volt-directory-system) function. Bridges are placed within Volt in a folder that is generated upon server start called `Bridges`. When you create a bridge and provide it a name you can actually provide a directory to create for it too. If the directory already exists it will simply use that directory rather than creating another one.
-
-```lua
---- Bridges
------ SomeBridges
--------- MyBridge
-MyExe.Volt.RegisterBridge('MyExe/SomeBridges/MyBridge')
-```
-
-!!! tip
-    Bridges are not bound to their executables. You can get and use a bridge from another executable!
+!!! info
+    Bridges *are* bound to their executables. You cannot get and fire a bridge from another executable. A work around to this problem is to create a public method in the second executable that can be accessed from the first.

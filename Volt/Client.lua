@@ -1,15 +1,17 @@
+--[[
+	Client
+	
+	Provided to all local scripts
+	and client-side executables
+]]
+
 local Client = {}
 local Volt, Promise
 
-local function getFromPath(o, s)
-	for i, v in pairs(string.split(s, '/')) do
-		local success = pcall(function()
-			o = o[v]
-		end)
-	end
-	return o
-end
-
+--[[
+	Execute an executable
+	@private
+]]
 local function execute(f)
 	local initialTime = Volt.Config.Debug and tick() or nil
 	local success, err = pcall(function()
@@ -28,40 +30,34 @@ local function execute(f)
 	end
 end
 
+--[[
+	Asynchronously execute an executable
+	@private
+]]
 local function asyncExe(f)
 	coroutine.wrap(function()
 		execute(f)
 	end)()
 end
 
-local function constructBridge(r)
-	local self = setmetatable({}, {})
-
-	self._remote = r
-
-	function self:Fire(...)
-		return self._remote:InvokeServer(...)
-	end
-	
-	function self:Hook(func)
-		self._remote.OnClientInvoke = function(...)
-			return func(...)
-		end
-	end
-
-	return self
-end
-
+--[[
+	Execute an executable and provide
+	whether it should be ran asynchronously or not
+	@public
+]]
 function Client.Execute(execs, async)
 	local startTime = Volt.Config.Debug and tick() or nil
 	if (startTime) then
 		print('BEGIN EXECUTE')
 	end
-	for index, exe in pairs(execs) do
+	for _, exe in pairs(execs) do
+		exe.Bridges = setmetatable({}, {
+			__index = Volt.Core.Bridge.__index,
+			__newindex = function(_, k)
+				error('Cannot create Bridge ' .. k .. ' as Bridges cannot be created on the client.')
+			end
+		})
 		exe.Volt = {
-			GetBridge = function(path)
-				return constructBridge(getFromPath(Volt.Bridges, path or error('A path must be provided to get a bridge')))
-			end,
 			Client = Volt.Client,
 			import = Volt.import
 		}
@@ -83,6 +79,42 @@ function Client.Execute(execs, async)
 	end
 end
 
+--[[
+	Bulk import executables and return them
+	in a nicely formatted way. Example of
+	a return:
+	local Executables = {
+		PlayerData = ...,
+	}
+
+	You can then use the returned executables
+	in Server.Execute:
+	Volt.Server.Execute {
+		Executables.PlayerData,
+	}
+	@public
+]]
+function Client.LoadExecutables(loc, deep)
+	return Volt.BulkImport(loc,
+		deep,
+		function(child)
+			if (string.match(child.Name, '.Client') == '.Client') then
+				return true
+			end
+			return false
+		end,
+		function(child)
+			return string.gsub(child.Name, '.Client', '')
+		end)
+end
+
+--[[
+	Await for an executable to execute. This
+	is useful for cross communication between
+	normal scripts and executables. Returns
+	a Promise.
+	@public	
+]]
 function Client.Await(n, t)
 	local promise = Promise.new(function(resolve, reject)
 		coroutine.wrap(function()

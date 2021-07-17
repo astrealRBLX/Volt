@@ -1,23 +1,17 @@
+--[[
+	Server
+	
+	Provided to all server scripts
+	and server-side executables
+]]
+
 local Server = {}
 local Volt, Promise
 
-local function getFromPath(o, s)
-	for i, v in pairs(string.split(s, '/')) do
-		if (i == #(string.split(s, '/'))) then
-			continue
-		end
-		local success = pcall(function()
-			o = o[v]
-		end)
-		if (not success) then
-			local x = Instance.new('Folder', o)
-			x.Name = v
-			o = x
-		end
-	end
-	return o
-end
-
+--[[
+	Execute an executable
+	@private
+]]
 local function execute(f)
 	local initialTime = Volt.Config.Debug and tick() or nil
 	local success, err = pcall(function()
@@ -36,50 +30,34 @@ local function execute(f)
 	end
 end
 
+--[[
+	Asynchronously execute an executable
+	@private
+]]
 local function asyncExe(f)
 	coroutine.wrap(function()
 		execute(f)
 	end)()
 end
 
-local function constructBridge(r)
-	local self = setmetatable({}, {})
-
-	self._remote = r
-
-	function self:Fire(c, ...)
-		return self._remote:InvokeClient(c, ...)
-	end
-	
-	function self:Hook(func)
-		self._remote.OnServerInvoke = function(...)
-			return func(...)
-		end
-	end
-
-	return self
-end
-
+--[[
+	Execute an executable and provide
+	whether it should be ran asynchronously or not
+	@public
+]]
 function Server.Execute(execs, async)
 	local startTime = Volt.Config.Debug and tick() or nil
 	if (startTime) then
 		print('BEGIN EXECUTE')
 	end
-	for index, exe in pairs(execs) do
+	for _, exe in pairs(execs) do
+		exe.Bridges = setmetatable({}, {
+			__newindex = Volt.Core.Bridge.__newindex
+		})
 		exe.Volt = {
-			RegisterBridge = function(path, func)
-				local iPath = getFromPath(Volt.Bridges, path or error('A path must be provided to register a new bridge'))
-				local remote = Instance.new('RemoteFunction', iPath)
-				remote.Name = string.split(path, '/')[#(string.split(path, '/'))]
-				
-				remote.OnServerInvoke = function(...)
-					return func(...)
-				end
-				
-				return constructBridge(remote)
-			end,
 			Server = Volt.Server,
-			import = Volt.import
+			import = Volt.import,
+			Bridge = Volt.Bridge 
 		}
 		if (exe.OnExecute) then
 			if (exe.Async == true) then
@@ -99,6 +77,42 @@ function Server.Execute(execs, async)
 	end
 end
 
+--[[
+	Bulk import executables and return them
+	in a nicely formatted way. Example of
+	a return:
+	local Executables = {
+		PlayerData = ...,
+	}
+
+	You can then use the returned executables
+	in Server.Execute:
+	Volt.Server.Execute {
+		Executables.PlayerData,
+	}
+	@public
+]]
+function Server.LoadExecutables(loc, deep)
+	return Volt.BulkImport(loc,
+		deep,
+		function(child)
+			if (string.match(child.Name, '.Server') == '.Server') then
+				return true
+			end
+			return false
+		end,
+		function(child)
+			return string.gsub(child.Name, '.Server', '')
+		end)
+end
+
+--[[
+	Await for an executable to execute. This
+	is useful for cross communication between
+	normal scripts and executables. Returns
+	a Promise.
+	@public	
+]]
 function Server.Await(n, t)
 	local promise = Promise.new(function(resolve, reject)
 		coroutine.wrap(function()
