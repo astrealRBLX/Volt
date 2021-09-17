@@ -1,0 +1,7 @@
+{
+  "name": "Volt",
+  "id": "volt",
+  "description": "A game framework centered around execution flow and modular code",
+  "version": "1.1.0",
+  "src": "Volt"
+}
