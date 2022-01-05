@@ -1,0 +1,13 @@
+# Project place file
+/Volt.rbxlx
+
+# Roblox Studio lock files
+/*.rbxlx.lock
+/*.rbxl.lock
+
+# Built documentation files
+site/
+
+# Rojo project files
+default.project.json
+build.project.json
