@@ -20,20 +20,20 @@ type InstancePath = {
   
   caller: LuaSourceContainer?,
   instance: Instance?,
-  
+
   Step: (self: InstancePath) -> (),
 }
 
 --[[
-  Validates a small segment of a path.
+  Validates the root segment of a path.
 ]]
-local function validatePathSegment(str: string)
+local function validatePathRoot(str: string)
   if str ~= '..' and str ~= '.' then
-    local success = pcall(function()
+    local success, serv = pcall(function()
       return game:GetService(str)
     end)
 
-    if not success then
+    if not success or not serv then
       return false
     end
   end
@@ -49,17 +49,15 @@ local function validatePath(str: string)
   if typeof(str) ~= 'string' then
     return false, 'Expected path to be of type string, received "%s"', typeof(str)
   end
-
   
   -- Validate split path length
   local split = string.split(str, '/')
   if #split == 0 then
     return false, 'Expected path to be greater than length 0'
   end
-
   
   -- Validate root of the path
-  local validRoot = validatePathSegment(split[1])
+  local validRoot = validatePathRoot(split[1])
   if not validRoot then
     return false, 'Expected path root to be "..", ".", or a service, received "%s"', split[1]
   end
@@ -97,6 +95,22 @@ end
   @within Path
   @private
 
+  Determines if a path is relative or absolute.
+]=]
+function Path:IsRelative(path: InstancePath)
+  for _, segment in pairs(path.splitPath) do
+		if segment == '.' or segment == '..' then
+			return true
+		end
+	end
+
+  return false
+end
+
+--[=[
+  @within Path
+  @private
+
   Steps through a path.
 ]=]
 function PathClass:Step()
@@ -108,15 +122,6 @@ function PathClass:Step()
   end
 
   local segment = self.splitPath[self.position]
-
-  -- Determine if the current segment is valid
-  if self.position ~= 1 then
-    local isValidSegment = validatePathSegment(segment)
-    if not isValidSegment then
-      Logger:Log(Logger.Identity.Error, 'Invalid path segment "%s" in path "%s".', segment, self.pathString)
-    end
-  end
-  
   local currentInstance = if self.position == 1 then self.caller else self.instance
 
   -- Handle stepping into the path
