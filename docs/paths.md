@@ -16,14 +16,27 @@ Other absolute path examples:
 
 ### Relative Paths
 
-Now let's write a relative path. Assume we're currently a script in a folder called `MyFolder` with a sibling that is a part named `MyPart`. We want to access that part but writing an absolute path could prove troublesome and tedious. To solve this Volt supports relative paths. The path used as a solution to this task is `./MyPart`. The single `.` means to look in the same directory as the script. What if we wanted to go out of the current parent? This is easily solved via the `..` operator. For example, `../MyFolder` is a path back to the original folder.
+Now let's write a relative path. Assume we're currently a script in a folder called `MyFolder` with a sibling that is a part named `MyPart`. We want to access that part but writing an absolute path could prove troublesome and tedious. To solve this Volt supports relative paths. The path used as a solution to this task is `./MyPart`. The single `.` means to look in the same directory as the script. What if we wanted to go out of the current parent? This is easily solved via the `..` operator. For example, `../MyFolder` is a path back to the original folder. It's also worth noting that functions that use paths will accept a `caller` argument that is required whenever you use a relative path.
 
 Other relative path examples:
 - `../../MyFolder/MyModel`
 - `./MyPart/MyTexture`
+- `SomeFolder/SomePart` *Where `SomeFolder` is a child of the current script*
 - `.` *Equivalent to `script.Parent`*
 - `..` *Equivalent to `script.Parent.Parent`*
 
-## Special Paths
+Paths must meet one of the following two conditions to be considered relative:
+- Contain `.` or `..` somewhere in the path
+- Start with a child of the current script
 
-Volt uses paths pretty frequently and normal path syntax as demonstrated above is fully supported, however, certain functions will alter the paths you pass in. For example, [:Import()](../api/Volt#Import) will prepend `ReplicatedStorage` to your path if it isn't relative or the beginning isn't a valid Roblox service. The API documentation for these methods explains how they alter paths in depth.
+## Prefixes
+
+Volt allows for prefixes on paths that adjust the path system's functionality. These prefixes are single capital letters followed by a `$`. For example, if you want the Volt's path system to use `:WaitForChild()` rather than `:FindFirstChild()` you can prepend `W$` to your path. Here you can see this in action with the following code:
+
+```lua
+local MyPart = Volt:FindInstance('W$Workspace/MyPart')
+```
+
+Here's a list of all prefixes and their functionality.
+
+- `W`: Will use `:WaitForChild()` instead of `:FindFirstChild()` when parsing the path
