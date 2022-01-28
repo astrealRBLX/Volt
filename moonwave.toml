@@ -1,0 +1,9 @@
+title = "Volt"
+gitRepoUrl = "https://github.com/astrealRBLX/Volt"
+
+[home]
+enabled = true
+includeReadme = false
+
+[footer]
+copyright = "Copyright © 2021 AstrealDev. Built with Moonwave and Docusaurus"
