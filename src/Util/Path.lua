@@ -129,7 +129,7 @@ function Path.new(path: string, caller: LuaSourceContainer?): InstancePath
 
   if not isValidPrefix then
     Logger:Log(Logger.Identity.Error, prefixResult)
-  else
+  elseif not isValidPrefix and prefixResult ~= Prefix.None then
     path = string.sub(path, 3)
   end
 
